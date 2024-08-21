@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "韓国兵役カウントダウン",
+  "version": "1.0",
+  "description": "韓国兵役の開始日と終了日を設定し、新しいタブでカウントダウンを表示します。",
+  "permissions": ["storage", "tabs"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  }
+}
