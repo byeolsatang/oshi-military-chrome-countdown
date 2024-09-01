@@ -17,5 +17,8 @@
   },
   "icons": {
     "128": "icon.png"
-  }
+  },
+  "web_accessible_resources": [
+    "canvas-confetti.js"
+  ]
 }

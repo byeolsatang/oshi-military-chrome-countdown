@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <title>兵役カウントダウン</title>
   <style>
     body {
@@ -11,16 +14,35 @@
       height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
     }
     #countdown {
       font-size: 72px;
       font-weight: bold;
+      font-family: "Libre Baskerville", serif;
+      font-weight: 400;
+      font-style: normal;
+      text-align: center;
+    }
+
+    #percentage {
+      font-size: 48px;
+    }
+
+    #search-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 400px;
     }
   </style>
 </head>
 <body>
+  <script async src="https://cse.google.com/cse.js?cx=a190acda356344d11"></script>
+  <div class="gcse-search"></div>
   <div id="countdown"></div>
+
+  <!-- confetti.jsのスクリプトを追加 -->
+  <script src="confetti.browser.min.js"></script>
   <script src="newtab.js"></script>
 </body>
 </html>

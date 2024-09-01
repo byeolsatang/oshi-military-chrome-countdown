@@ -11,10 +11,20 @@
 <body>
   <h2>兵役期間設定</h2>
   <label for="startDate">開始日:</label>
-  <input type="date" id="startDate">
+  <input type="date" id="startDate"><br>
   <label for="endDate">終了日:</label>
-  <input type="date" id="endDate">
+  <input type="date" id="endDate"><br>
+  
+  <h2>外観設定</h2>
+  <label for="bgColor">背景カラー:</label>
+  <input type="color" id="bgColor" value="#f0f0f0"><br>
+  <label for="textColor">文字カラー:</label>
+  <input type="color" id="textColor" value="#cccccc"><br>
+  <label for="bgImage">背景画像URL:</label>
+  <input type="text" id="bgImage" placeholder="背景画像のURL"><br>
+  
   <button id="save">保存</button>
+  
   <script src="popup.js"></script>
 </body>
 </html>
