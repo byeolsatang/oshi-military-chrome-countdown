@@ -1,25 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
-  chrome.storage.sync.get(['bgColor', 'textColor', 'bgImage'], (result) => {
-    // 背景色と文字色を適用
-    document.body.style.backgroundColor = result.bgColor || '#f0f0f0';
-    document.body.style.color = result.textColor || '#cccccc';
+  // Load settings from both sync and local storage
+  Promise.all([
+    new Promise(resolve => chrome.storage.sync.get(['bgColor', 'textColor', 'bgOpacity'], resolve)),
+    new Promise(resolve => chrome.storage.local.get(['backgroundImage'], resolve))
+  ]).then(([syncData, localData]) => {
+    // Apply background color and text color
+    document.body.style.backgroundColor = syncData.bgColor || '#f0f0f0';
+    document.body.style.color = syncData.textColor || '#cccccc';
 
-    // 背景画像を適用
-    if (result.bgImage) {
-      document.body.style.backgroundImage = `url('${result.bgImage}')`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundRepeat = 'no-repeat';
-      document.body.style.backgroundAttachment = 'fixed';
+    // Apply background image if available
+    if (localData.backgroundImage) {
+      // Create a wrapper div for background image
+      const bgWrapper = document.createElement('div');
+      bgWrapper.style.position = 'fixed';
+      bgWrapper.style.top = '0';
+      bgWrapper.style.left = '0';
+      bgWrapper.style.width = '100%';
+      bgWrapper.style.height = '100%';
+      bgWrapper.style.zIndex = '-1';
+      bgWrapper.style.backgroundImage = `url('${localData.backgroundImage}')`;
+      bgWrapper.style.backgroundSize = 'cover';
+      bgWrapper.style.backgroundPosition = 'center';
+      bgWrapper.style.backgroundRepeat = 'no-repeat';
+      bgWrapper.style.opacity = (syncData.bgOpacity || 100) / 100;
+      document.body.prepend(bgWrapper);
     }
   });
 
   function launchConfetti() {
     confetti({
       particleCount: 100,
-      spread: 160, // コンフェッティが広がる角度を広げる
-      startVelocity: 30, // 初速を速くする
-      gravity: 0.5, // 重力を軽減する
+      spread: 160,
+      startVelocity: 30,
+      gravity: 0.5,
       origin: { y: 0.6 }
     });
   }
@@ -48,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         countdownElement.innerHTML = `D-${daysLeft} <span id="percentage">(${percentage}%)</span>`;
       } else if (today.getTime() === end.getTime()) {
         countdownElement.innerHTML = "転役おめでとうございます";
-        launchConfetti(); // 初回のコンフェッティ
-        setInterval(launchConfetti, 10000); // 10秒ごとにコンフェッティを繰り返す
+        launchConfetti();
+        setInterval(launchConfetti, 10000);
       } else {
         daysLeft = 0;
         percentage = 100;
@@ -72,5 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 1000 * 60 * 60 * 24); // 24時間ごとに更新
+  setInterval(updateCountdown, 1000 * 60 * 60 * 24);
 });
