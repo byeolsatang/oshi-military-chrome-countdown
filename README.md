@@ -21,7 +21,7 @@
 
 1. このリポジトリをクローンまたはダウンロードします。
     ```bash
-    git clone https://github.com/your-username/oshi-military-countdown.git
+    git clone https://github.com/byeolsatang/chrome-extension_countdown.git
     ```
 2. Chrome の「拡張機能」ページ（`chrome://extensions/`）を開きます。
 3. 右上の「デベロッパーモード」を有効にします。
@@ -58,5 +58,7 @@
 
 ## 表示例
 
-- **D-365**  
+- **D-167**  
   新しいタブを開くと、アップロードした推しの写真とともに以下のように表示されます:
+  ![スクリーンショット 2025-01-05 17 19 19](https://github.com/user-attachments/assets/2ae535ba-a5d6-4c1c-887c-5d76bbc23156)
+
