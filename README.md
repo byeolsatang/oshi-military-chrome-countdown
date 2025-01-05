@@ -21,7 +21,7 @@
 
 1. このリポジトリをクローンまたはダウンロードします。
     ```bash
-    git clone https://github.com/byeolsatang/chrome-extension_countdown.git
+    git clone https://github.com/byeolsatang/oshi-military-chrome-countdown.git
     ```
 2. Chrome の「拡張機能」ページ（`chrome://extensions/`）を開きます。
 3. 右上の「デベロッパーモード」を有効にします。
