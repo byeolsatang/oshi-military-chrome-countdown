@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "韓国兵役カウントダウン",
+  "name": "推し兵役カウントダウン ",
   "version": "1.0",
   "description": "韓国兵役の開始日と終了日を設定し、新しいタブでカウントダウンを表示します。",
   "permissions": ["storage", "tabs"],
