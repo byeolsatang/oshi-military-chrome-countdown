@@ -2,17 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>推し兵役カウントダウン 設定</title>
+  <title>推しの兵役カウントダウン設定</title>
   <style>
     body {
       width: 300px;
       padding: 10px;
       margin: 0;
       max-height: 500px;
-      transform: scale(1);
-      zoom: 1;
     }
-
+    
     .container {
       display: flex;
       flex-direction: column;
@@ -25,11 +23,24 @@
       border-radius: 4px;
     }
 
+    .color-input-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    .color-input-group label {
+      margin: 0;
+      display: inline-block;
+    }
+
     .date-input-container {
       display: flex;
       flex-direction: column;
       align-items: left;
-      gap: 5px;
+      gap: 10px;
       margin-bottom: 5px;
     }
 
@@ -79,12 +90,6 @@
       margin: 5px 0;
     }
 
-    .bgcolor-section , .textcolor-section {
-      display: flex;
-      align-items: center;
-      gap: 5px; 
-    }
-
     .slider-container {
       margin: 10px 0;
     }
@@ -97,11 +102,6 @@
     .slider-value {
       display: inline-block;
       margin-left: 10px;
-    }
-
-    label {
-      display: block;
-      margin-top: 5px;
     }
 
     button {
@@ -129,27 +129,6 @@
     input[type="range"] {
       width: 100%;
     }
-  
-    input[type="date"] {
-  -webkit-appearance: none; /* デフォルトのスタイルをリセット */
-  appearance: none;
-  font-size: 16px; /* 適切なサイズを指定 */
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  width: 130px; /* 固定幅を指定 */
-  transform: scale(1); /* 拡大を防ぐ */
-  zoom: 1; /* 拡大防止 */
-}
-
-input[type="date"]:focus {
-  outline: none;
-  box-shadow: 0 0 3px #007BFF; /* 青い枠線を追加 */
-  border-color: #007BFF;
-}
-
-
   </style>
 </head>
 <body>
@@ -176,14 +155,14 @@ input[type="date"]:focus {
         <div class="preview-text">プレビュー</div>
       </div>
 
-      <div class="bgcolor-section" id="bgcolor-area">
+      <div class="color-input-group">
         <label for="bgColor">背景カラー:</label>
         <input type="color" id="bgColor" value="#f0f0f0">
-       </div>
+      </div>
       
-       <div class="textcolor-section" id="textcolor-area">
-      <label for="textColor">文字カラー:</label>
-      <input type="color" id="textColor" value="#cccccc">
+      <div class="color-input-group">
+        <label for="textColor">文字カラー:</label>
+        <input type="color" id="textColor" value="#cccccc">
       </div>
       
       <label for="bgImageFile">背景画像を選択:</label>

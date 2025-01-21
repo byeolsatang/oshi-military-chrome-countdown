@@ -4,26 +4,15 @@ document.addEventListener('DOMContentLoaded', () => {
     new Promise(resolve => chrome.storage.sync.get(['bgColor', 'textColor', 'bgOpacity'], resolve)),
     new Promise(resolve => chrome.storage.local.get(['backgroundImage'], resolve))
   ]).then(([syncData, localData]) => {
-    // Apply background color and text color
+    // Apply background color
     document.body.style.backgroundColor = syncData.bgColor || '#f0f0f0';
-    document.body.style.color = syncData.textColor || '#cccccc';
+    document.body.style.color = syncData.textColor || '#000000';
 
     // Apply background image if available
+    const backgroundWrapper = document.querySelector('.background-wrapper');
     if (localData.backgroundImage) {
-      // Create a wrapper div for background image
-      const bgWrapper = document.createElement('div');
-      bgWrapper.style.position = 'fixed';
-      bgWrapper.style.top = '0';
-      bgWrapper.style.left = '0';
-      bgWrapper.style.width = '100%';
-      bgWrapper.style.height = '100%';
-      bgWrapper.style.zIndex = '-1';
-      bgWrapper.style.backgroundImage = `url('${localData.backgroundImage}')`;
-      bgWrapper.style.backgroundSize = 'cover';
-      bgWrapper.style.backgroundPosition = 'center';
-      bgWrapper.style.backgroundRepeat = 'no-repeat';
-      bgWrapper.style.opacity = (syncData.bgOpacity || 100) / 100;
-      document.body.prepend(bgWrapper);
+      backgroundWrapper.style.backgroundImage = `url('${localData.backgroundImage}')`;
+      backgroundWrapper.style.opacity = (syncData.bgOpacity || 100) / 100;
     }
   });
 
@@ -38,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateCountdown() {
-    chrome.storage.sync.get(['startDate', 'endDate'], (result) => {
+    chrome.storage.sync.get(['startDate', 'endDate', 'textColor'], (result) => {
       const today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
       today.setHours(0, 0, 0, 0);
       const start = new Date(result.startDate);
@@ -69,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         countdownElement.innerHTML = `D-${daysLeft} <span id="percentage">(${percentage}%)</span>`;
       }
 
+      // デバッグ情報の表示
       const debugInfo = `
         Today (KST): ${today.toLocaleDateString('ko-KR')}
         Start (KST): ${start.toLocaleDateString('ko-KR')}
@@ -78,7 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       console.log(debugInfo);
 
+      // 既存のデバッグ要素があれば削除
+      const existingDebug = document.getElementById('debug-info');
+      if (existingDebug) {
+        existingDebug.remove();
+      }
+
+      // 新しいデバッグ要素を作成
       const debugElement = document.createElement('pre');
+      debugElement.id = 'debug-info';
+      debugElement.style.position = 'fixed';
+      debugElement.style.bottom = '10px';
+      debugElement.style.left = '10px';
+      debugElement.style.margin = '0';
+      debugElement.style.padding = '10px';
+      debugElement.style.backgroundColor = 'transparent';  // 背景を透明に
+      debugElement.style.color = result.textColor || '#000000';  // textColorを適用
+      debugElement.style.borderRadius = '5px';
+      debugElement.style.fontSize = '12px';
+      debugElement.style.zIndex = '1000';
       debugElement.textContent = debugInfo;
       document.body.appendChild(debugElement);
     });

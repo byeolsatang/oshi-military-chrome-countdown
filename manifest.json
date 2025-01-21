@@ -1,14 +1,15 @@
 {
-  "manifest_version": 2,
-  "name": "推し兵役カウントダウン ",
+  "manifest_version": 3,
+  "name": "推しの兵役カウントダウン",
   "version": "1.0",
-  "description": "韓国兵役の開始日と終了日を設定し、新しいタブでカウントダウンを表示します。",
-  "permissions": ["storage", "tabs"],
+  "description": "推しの兵役の開始日と終了日を設定し、新しいタブでカウントダウンを表示します。",
+  "permissions": [
+    "storage"
+  ],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
   },
@@ -18,7 +19,13 @@
   "icons": {
     "128": "icon.png"
   },
-  "web_accessible_resources": [
-    "canvas-confetti.js"
-  ]
+  "web_accessible_resources": [{
+    "resources": [
+      "confetti.browser.min.js",
+      "fonts/LibreBaskerville-Regular.ttf",
+      "fonts/LibreBaskerville-Bold.ttf",
+      "fonts/LibreBaskerville-Italic.ttf"
+    ],
+    "matches": ["<all_urls>"]
+  }]
 }
